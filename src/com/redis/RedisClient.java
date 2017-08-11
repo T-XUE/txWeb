@@ -71,7 +71,7 @@ public class RedisClient {
     }
 
     /**
-     * 释放jedis资源
+     * 释放jedis资源tx
      *
      * @param jedis
      */
