@@ -79,26 +79,32 @@
 		</property>
 		<property name="propagationBehaviorName" value="PROPAGATION_REQUIRES_NEW"/>
 	</bean>
-	<!--<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">-->
-		<!--<property name="configLocations">-->
-			<!--<list>-->
-				<!--<value>classpath:sqlmap/sqlmap.xml</value>-->
-			<!--</list>-->
-		<!--</property>-->
-		<!--<property name="dataSource" ref="dataSource" />-->
-		<!--<property name="lobHandler" ref="lobHandler"></property>-->
-	<!--</bean>-->
-	<!--<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" />-->
-	<!--<bean id="baseSqlMapClientDAO" abstract="true">-->
-		<!--<property name="dataSource">-->
-			<!--<ref bean="dataSource" />-->
-		<!--</property>-->
-		<!--<property name="sqlMapClient">-->
-			<!--<ref bean="sqlMapClient" />-->
-		<!--</property>-->
-	<!--</bean>-->
 
-	<aop:aspectj-autoproxy />
+	<!-- 3.2 开启使用annotation（注解）控制事务，基于类的事务将启用，默认为“基于接口的代理将起作用” -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-	<!--<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"></tx:annotation-driven>-->
+	<!-- 2  注册 mybatis sqlmapper 映射-->
+	<!-- 2.1  spring 自动注册 mybatis 的映射文件配置 （mappers.mapper 节点内容） -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 映射文件中，mapper.namespace 属性值“接口”的基础包名 -->
+		<property name="basePackage" value="com.springmvc.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
+	<!-- 2.2 sping 自动注册 mappers.mapper 文件，并将对应的接口注册到ioc容器（即：使用接口实例访问数据库） -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 使用的数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 如需添加特殊映射文件，可以写到下面的  xml 文件中 -->
+		<!--<property name="configLocation"  value="classpath:mybatis-config/sqlMapConfig.xml"/>-->
+		<!-- 自动扫描mapping.xml文件，**表示迭代查找,也可在sqlMapConfig.xml中单独指定xml文件-->
+		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml" />
+	</bean>
+
+	<!-- 2.3 使用 sqlSessionFactory 管理 sqlsession 对象，并注册到ioc容器（即：使用 sqlSession.selectList() 等方式访问数据库）-->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+
+
 </beans>
