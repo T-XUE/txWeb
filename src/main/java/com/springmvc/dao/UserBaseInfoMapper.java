@@ -1,7 +1,9 @@
 package com.springmvc.dao;
 
 import com.springmvc.domain.UserBaseInfo;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserBaseInfoMapper {
     int deleteByPrimaryKey(String userBaseId);
 
