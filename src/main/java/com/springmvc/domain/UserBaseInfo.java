@@ -1,5 +1,4 @@
 package com.springmvc.domain;
-
 import java.util.Date;
 
 public class UserBaseInfo {
