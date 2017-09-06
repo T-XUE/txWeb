@@ -1,7 +1,7 @@
 package com.springmvc.controller;
 
-import com.springmvc.dao.UserBaseInfoMapper;
-import com.springmvc.domain.UserBaseInfo;
+import com.springmvc.mapper.UserBaseInfoMapper;
+import com.springmvc.model.UserBaseInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
