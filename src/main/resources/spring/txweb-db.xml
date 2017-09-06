@@ -98,7 +98,7 @@
 		<!-- 如需添加特殊映射文件，可以写到下面的  xml 文件中 -->
 		<!--<property name="configLocation"  value="classpath:mybatis-config/sqlMapConfig.xml"/>-->
 		<!-- 自动扫描mapping.xml文件，**表示迭代查找,也可在sqlMapConfig.xml中单独指定xml文件-->
-		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml" />
+		<property name="mapperLocations" value="classpath:mybatis/**/*Mapper.xml" />
 	</bean>
 
 	<!-- 2.3 使用 sqlSessionFactory 管理 sqlsession 对象，并注册到ioc容器（即：使用 sqlSession.selectList() 等方式访问数据库）-->
