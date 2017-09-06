@@ -12,7 +12,7 @@
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
-        <!--<plugin type="com.yjf.microbank.common.util.CustomModelPlugin"></plugin>-->
+        <!--<plugin type="com.springmvc.util.CustomModelPlugin"></plugin>-->
 
 
         <!-- 关闭注解信息 -->
